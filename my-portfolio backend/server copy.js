@@ -12,10 +12,10 @@ app.use(cors({
 }));
 app.use(express.json());
 // Ensure the response header is set correctly
-app.use((req, res, next) => {
-  res.setHeader('Content-Type', 'text/javascript');
-  next();
-});
+// app.use((req, res, next) => {
+//   res.setHeader('Content-Type', 'text/javascript');
+//   next();
+// });
 
 app.post("/api/contact", async (req, res) => {
   try {
