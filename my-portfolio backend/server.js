@@ -18,21 +18,31 @@ app.use(express.json());
 // });
 
 app.post("/api/contact", async (req, res) => {
+  console.log("🔥 HIT /api/contact");
+  console.log("BODY:", req.body);
+
   try {
     const { name, email, message } = req.body;
 
     if (!name || !email || !message) {
-      return res.status(400).json({ success: false, message: "All fields required" });
+      console.log("❌ Missing fields");
+      return res.status(400).json({ success: false });
     }
+
+    console.log("✅ Before Google Sheets");
 
     await appendToSheet({ name, email, message });
 
+    console.log("✅ After Google Sheets");
+
     res.status(200).json({ success: true });
   } catch (err) {
+    console.log("❌ CATCH BLOCK ERROR");
     console.error(err);
     res.status(500).json({ success: false });
   }
 });
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on ${PORT}`));
