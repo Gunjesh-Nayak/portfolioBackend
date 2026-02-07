@@ -1,8 +1,10 @@
 import { google } from "googleapis";
 
-const auth = new google.auth.GoogleAuth({
+const auth =new google.auth.GoogleAuth({
+  keyFile: "service-account.json",
   scopes: ["https://www.googleapis.com/auth/spreadsheets"],
 });
+
 
 const sheets = google.sheets({
   version: "v4",
